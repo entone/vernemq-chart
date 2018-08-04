@@ -13,6 +13,9 @@ service:
   type: ClusterIP
   port: 4883
 
+certs:
+  name: glacier-certificates
+
 ingress:
   enabled: false
   annotations: {}

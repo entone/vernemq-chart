@@ -19,10 +19,18 @@ spec:
         app: {{ template "vernemq.name" . }}
         release: {{ .Release.Name }}
     spec:
+      volumes:
+        - name: certs
+        secret:
+          secretName: {{ .Values.certs.name }}
+          readOnly: true
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: certs
+            mountPath: "/etc/ssl"
           ports:
             - name: mqtt
               containerPort: 4883
@@ -48,6 +56,18 @@ spec:
                 fieldPath: metadata.namespace
           - name: DOCKER_VERNEMQ_KUBERNETES_APP_LABEL
             value: {{ template "vernemq.name" . }}
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.DEFAULT
+            value: "0.0.0.0:4883"
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.CAFILE
+            value: "/etc/ssl/ca.crt"
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.CERTFILE
+            value: "/etc/ssl/glacier.crt"
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.KEYFILE
+            value: "/etc/ssl/glacier.key"
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.REQUIRE_CERTIFICATE
+            value: "on"
+          - name: DOCKER_VERNEMQ_LISTENER.SSL.USE_IDENTITY_AS_USERNAME
+            value: "on"
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
