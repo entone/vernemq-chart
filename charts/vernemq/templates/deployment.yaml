@@ -20,7 +20,7 @@ spec:
         release: {{ .Release.Name }}
     spec:
       volumes:
-        - name: certs
+      - name: certs
         secret:
           secretName: {{ .Values.certs.name }}
           readOnly: true
@@ -29,7 +29,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: certs
+          - name: certs
             mountPath: "/etc/ssl"
           ports:
             - name: mqtt
