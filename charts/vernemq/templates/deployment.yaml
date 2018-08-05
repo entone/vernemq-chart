@@ -58,6 +58,8 @@ spec:
             value: {{ template "vernemq.name" . }}
           - name: DOCKER_VERNEMQ_ALLOW_ANONYMOUS
             value: "on"
+          - name: DOCKER_VERNEMQ_PLUGINS.vmq_passwd
+            value: "off"
           - name: DOCKER_VERNEMQ_LISTENER.ssl.default
             value: "0.0.0.0:4883"
           - name: DOCKER_VERNEMQ_LISTENER.ssl.cafile
