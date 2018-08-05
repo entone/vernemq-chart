@@ -66,8 +66,6 @@ spec:
             value: "/etc/ssl/glacier.key"
           - name: DOCKER_VERNEMQ_LISTENER.ssl.require_certificate
             value: "on"
-          - name: DOCKER_VERNEMQ_LISTENER.ssl.use_identity_as_username
-            value: "on"
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
