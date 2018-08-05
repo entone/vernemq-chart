@@ -56,17 +56,17 @@ spec:
                 fieldPath: metadata.namespace
           - name: DOCKER_VERNEMQ_KUBERNETES_APP_LABEL
             value: {{ template "vernemq.name" . }}
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.DEFAULT
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.default
             value: "0.0.0.0:4883"
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.CAFILE
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.cafile
             value: "/etc/ssl/ca.crt"
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.CERTFILE
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.certfile
             value: "/etc/ssl/glacier.crt"
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.KEYFILE
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.keyfile
             value: "/etc/ssl/glacier.key"
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.REQUIRE_CERTIFICATE
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.require_certificate
             value: "on"
-          - name: DOCKER_VERNEMQ_LISTENER.SSL.USE_IDENTITY_AS_USERNAME
+          - name: DOCKER_VERNEMQ_LISTENER.ssl.use_identity_as_username
             value: "on"
           resources:
 {{ toYaml .Values.resources | indent 12 }}
